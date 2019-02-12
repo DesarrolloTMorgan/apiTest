@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+/*
 Route::get('articles', function() {
     // If the Content-Type and Accept headers are set to 'application/json', 
     // this will return a JSON structure. This will be cleaned up later.
@@ -42,14 +42,14 @@ Route::delete('articles/{id}', function($id) {
     Article::find($id)->delete();
 
     return 204;
-});
+}); */
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('articles', 'ArticleController@getAll');
-    Route::get('articles/{article}', 'ArticleController@show');
-    Route::post('articles', 'ArticleController@store');
-    Route::put('articles/{article}', 'ArticleController@update');
-    Route::delete('articles/{article}', 'ArticleController@delete');
+    Route::get('articles/{id}', 'ArticleController@getArticle');
+    Route::post('articles/newArticle', 'ArticleController@store');
+    Route::put('articles/update', 'ArticleController@update');
+    Route::delete('articles/{id}', 'ArticleController@delete');
 });
 
 

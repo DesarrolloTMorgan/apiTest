@@ -18,16 +18,37 @@ class ArticleController extends Controller
         return $article;
     }
 
-    public function store(Request $request)
+    public function getArticle($id)
     {
-        //return Article::create($request->all());
-        $article = Article::create($request->all());
-        return response()->json($article, 201);
+        $article =  Article::find($id)->toArray();
+        return response()->json([
+            'status' => 'ok',
+            'data' => $article,
+        ]);
     }
 
-    public function update(Request $request, Article $article)
+    public function store(Request $request)
     {
-        //$article = Article::findOrFail($id);
+
+        $article = new Article;
+        $article->title = $request->title;
+        $article->body = $request->body;
+        $article->save();
+        return response()->json([
+            'status' => 'ok',
+            'mensaje' => 'Creado correctamente',
+            'data' => $article,
+        ]);
+
+        //return Article::create($request->all());
+        // $article = Article::create($request->all());
+        // return response()->json($article, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->id;
+        $article = Article::findOrFail($id);
         //$article->update($request->all());
         $article->update($request->all());
         return response()->json($article, 200);
@@ -44,7 +65,7 @@ class ArticleController extends Controller
         $articles = Article::all();
         
         return response()->json([
-            'codigo' => '200',
+            'status' => 'ok',
             "data" => $articles->toArray(),
         ]);
     }

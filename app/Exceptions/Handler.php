@@ -6,6 +6,9 @@ use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -55,13 +58,40 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'error' => 'Resource not found'
             ], 404);
+        } elseif ($exception instanceof AuthenticationException) {
+            return $this->unauthenticated($request, $exception);
+
+        } elseif ($exception instanceof AuthorizationException) {
+            return $this->unautoauthorizated($request, $exception);
+
+        } elseif ($this->isHttpException($exception)) {
+            if ($exception instanceof NotFoundHttpException) {
+                return response()->json('error_404_path');
+            }
+            return 'error_4004_path';
         }
-        
-        return parent::render($request, $exception);
+    
+        return response()->json(['status' => 'error','message' => 'You pass invalid token']);//parent::render($request, $exception);
     }
 
     protected function unauthenticated ($request, AuthenticationException $exception)
     {
-        return response()->json(['error' => 'Unauthenticated'], 401);
+        if ($request->expectsJson()) {
+
+            /** return response()->json(['error' => 'Unauthenticated.'], 401); */
+
+            	$response = ['status' => 'error','message' => 'You pass invalid token'];
+
+            	return response()->json($response);
+
+        } 
+        return redirect()->guest('home');
+        //return response()->json(['error' => 'Unauthenticated'], 401);
     }
+
+    protected function unauthorizated ($request, AuthorizationException $exception)
+    {
+        return response()->json(['error' => 'Unauthorizated'], 401);
+    }
+
 }
