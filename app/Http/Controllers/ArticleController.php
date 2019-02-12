@@ -39,4 +39,13 @@ class ArticleController extends Controller
         $article->delete();
         return response()->json(null, 204);
     }
+
+    public function getAll(){
+        $articles = Article::all();
+        
+        return response()->json([
+            'codigo' => '200',
+            "data" => $articles->toArray(),
+        ]);
+    }
 }

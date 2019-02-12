@@ -44,8 +44,10 @@ Route::delete('articles/{id}', function($id) {
     return 204;
 });
 
-Route::get('articles', 'ArticleController@index');
+Route::get('articles', 'ArticleController@getAll');
 Route::get('articles/{article}', 'ArticleController@show');
 Route::post('articles', 'ArticleController@store');
 Route::put('articles/{article}', 'ArticleController@update');
 Route::delete('articles/{article}', 'ArticleController@delete');
+Route::post('register', 'Auth\RegisterController@register');
+Route::post('login', 'Auth\LoginController@login');
