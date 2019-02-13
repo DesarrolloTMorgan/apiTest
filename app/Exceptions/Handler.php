@@ -71,7 +71,8 @@ class Handler extends ExceptionHandler
             return 'error_4004_path';
         }
     
-        return response()->json(['status' => 'error','message' => 'You pass invalid token']);//parent::render($request, $exception);
+        return parent::render($request, $exception);
+        //return response()->json(['status' => 'error','message' => 'You pass invalid token']);
     }
 
     protected function unauthenticated ($request, AuthenticationException $exception)

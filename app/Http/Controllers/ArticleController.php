@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Article;
+use function GuzzleHttp\json_decode;
 
 class ArticleController extends Controller
 {
@@ -56,17 +57,53 @@ class ArticleController extends Controller
 
     public function delete(Request $request, $id)
     {
-        //$article = Article::findOrFail($id);
-        $article->delete();
-        return response()->json(null, 204);
+        $article = Article::findOrFail($id);
+        $isDeleted = $article->delete();
+        if($isDeleted){
+            return response()->json([
+                'status' => 'ok',
+                'mensaje' => 'Borrado correctamente',
+            ], 204);
+        }
+        return response()->json([
+            'status' => 'error',
+            'mensaje' => 'No se pudo borrar',
+        ], 204);
     }
 
     public function getAll(){
         $articles = Article::all();
-        
         return response()->json([
             'status' => 'ok',
-            "data" => $articles->toArray(),
+            'data' => $articles->toArray(),
         ]);
+    }
+
+    public function manageArticles (Request $request)
+    {
+        // $object = json_decode(json_encode((object) $request->data), FALSE);
+        // print_r($object->article->title);
+        $data = $request->article;
+        $tipo = $request->type;
+        if($tipo == "newArticle"){
+            $article = new Article;
+            $article->title = $data['title'];
+            $article->body = $data['body'];
+            $article->save();
+            return response()->json([
+                'status'=>'ok',
+                'data' => $article,
+            ], 200);
+        } elseif ($tipo == "getAll") {
+            return $this->getAll();
+        } elseif ($tipo == "delete") {
+            return $this->delete($request, $data['id']);
+        } else {
+            return response()->json([
+                'status'=>'error',
+                'message'=>'tipo no reconocido',
+                'data' => 'todo mal prro :(',
+            ], 200);
+        }
     }
 }

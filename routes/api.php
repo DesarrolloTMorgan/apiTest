@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('articles/newArticle', 'ArticleController@store');
     Route::put('articles/update', 'ArticleController@update');
     Route::delete('articles/{id}', 'ArticleController@delete');
+    Route::post('articles/manageArticles', 'ArticleController@manageArticles');
 });
 
 
