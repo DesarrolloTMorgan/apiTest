@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Repartidor;
+use Illuminate\Support\Str;
 
 class RepartidoresTableSeeder extends Seeder
 {
@@ -18,12 +19,12 @@ class RepartidoresTableSeeder extends Seeder
 
         // Create a few 'Repartidores' in our database:
         for ($i = 0; $i < 2; $i++) {
-            Article::create([
+            Repartidor::create([
                 'nombre' => $faker->name,
                 'foto' => $faker->url,
-                'modelo_vehiculo' => $faker->name,
-                'color_vehiculo' => $faker->name, // secret
-                'placas_vehiculo' => str::random(6),
+                'modelo_vehiculo' => $faker->word,
+                'color_vehiculo' => $faker->colorName,
+                'placas_vehiculo' => Str::random(6),
             ]);
         }
 
