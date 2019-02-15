@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 /*
 Route::get('articles', function() {
-    // If the Content-Type and Accept headers are set to 'application/json', 
+    // If the Content-Type and Accept headers are set to 'application/json',
     // this will return a JSON structure. This will be cleaned up later.
     return Article::all();
 });
@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('articles/update', 'ArticleController@update');
     Route::delete('articles/{id}', 'ArticleController@delete');
     Route::post('articles/manageArticles', 'ArticleController@manageArticles');
+    Route::post('orders', 'OrderController@ordersApi');
 });
 
 
@@ -58,6 +59,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
+Route::get('isEmpty', 'FirstController@testEmpty');
 
 Route::middleware('auth:api')
     ->get('/user', function (Request $request) {

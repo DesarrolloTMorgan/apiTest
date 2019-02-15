@@ -82,4 +82,18 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function ordersApi (Request $request)
+    {
+        $tipo = $request->type;
+        switch($tipo) {
+            case 'getAll':
+                $orders = Order::where('estatus', "<>", "Cerrado")->get();
+                return response()->json([
+                    'status' => 'ok',
+                    'data' => $orders->toArray(),
+                ]);
+                break;
+        }
+    }
 }

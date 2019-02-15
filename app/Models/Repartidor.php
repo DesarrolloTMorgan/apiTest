@@ -13,4 +13,8 @@ class Repartidor extends Model
      */
     protected $table = 'repartidores';
     protected $fillable = ['nombre', 'foto', 'modelo_vehiculo','color_vehiculo','placas_vehiculo'];
+
+    public function orders(){
+        return $this->hasMany('App\Models\Order');
+    }
 }

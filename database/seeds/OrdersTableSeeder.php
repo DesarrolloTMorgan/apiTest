@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Order;
+use Illuminate\Support\Str;
 
 class OrdersTableSeeder extends Seeder
 {
@@ -21,19 +22,17 @@ class OrdersTableSeeder extends Seeder
             Order::create([
                 'nombre_recibe' => $faker->name,
                 'calle' => $faker->streetName,
-                'numero' => $faker->word,
-                'colonia' => $faker->colorName,
+                'numero' => $faker->buildingNumber,
+                'colonia' => $faker->secondaryAddress,
                 'entre_calles' => Str::random(6),
-                'referencia' => $faker->colorName,
-                'telefono' => $faker->colorName,
-                'lugar_pedido' => $faker->colorName,
-                'detalle_pedido' => $faker->colorName,
-                'estatus' => $faker->colorName,
-                'costo' => $faker->colorName,
-                'menasje_respuesta' => $faker->colorName,
-                'customer_id' => $faker->colorName,
-                'repartidor_id' => $faker->colorName,
-                'store_id' => $faker->colorName,
+                'referencia' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+                'telefono' => $faker->phoneNumber,
+                'lugar_pedido' => $faker->company,
+                'detalle_pedido' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+                'estatus' => 'Nuevo',
+                'costo' => $faker->buildingNumber,
+                'menasje_respuesta' => '',
+                'customer_id' => 1,
             ]);
         }
     }

@@ -27,11 +27,11 @@ class CreateOrdersTable extends Migration
             $table->string('estatus');
             $table->string('costo');
             $table->text('menasje_respuesta');
-            $table->unsignedInteger('customer_id')->nullable();
+            $table->unsignedInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->unsignedInteger('repartidor_id')->nullable();
             $table->foreign('repartidor_id')->references('id')->on('repartidores');
-            $table->unsignedInteger('store_id');
+            $table->unsignedInteger('store_id')->nullable();
             $table->foreign('store_id')->references('id')->on('stores');
             $table->timestamps();
         });
