@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('articles/{id}', 'ArticleController@delete');
     Route::post('articles/manageArticles', 'ArticleController@manageArticles');
     Route::post('orders', 'OrderController@ordersApi');
+    Route::post('addProfileImage', 'FirstController@saveProfilePhoto');
 });
 
 
