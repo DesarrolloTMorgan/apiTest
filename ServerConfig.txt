@@ -1,0 +1,46 @@
+ServerConfig
+
+Todo va en ~/www y ya se hizo el link para apache server en var/www/html;
+Para esto hay que darle los permisos a la carpeta ~/www; los permisos de usuario y grupo (chmod $USER:www-data www) (Ejecutar desde el home ~)
+
+https://files.phpmyadmin.net/phpMyAdmin/4.8.5/phpMyAdmin-4.8.5-all-languages.zip
+
+Url:
+ec2-18-191-169-54.us-east-2.compute.amazonaws.com
+
+Ws url:
+http://ec2-18-191-169-54.us-east-2.compute.amazonaws.com/motoserver/api/login
+
+_____________________________
+| root at localhost			|
+| mi*yz2NAQZeixR$3			|
+|							|
+| root at 127.0.0.1			|
+| AE^#oWJ@%sO4SuDz			|
+|							|
+|							|
+|							|
+| root at localhost			|
+| T$boj95@iIRkWyKl			|
+|							|
+| motoserver at 127.0.0.1   |
+| zGCY3Z^sd&&@@VYU			|
+|___________________________|
+
+Token test@api.com Localhost
+1W16rHsVOdIhNkYjCnVA4kNbUif2WbiNzfS7bl1prma4CCCMORcYjkugTXx4
+
+Token moto Server
+k3VkJkdPz9SF30gO7NIIInpb2s5nhpDxAjLZbVZg0nYhQYzVQDcpgsZQ2xmD
+
+cuando se jala un repositorio de laravel hay que ejecutar las siguientes acciones
+
+1.- En la terminal dentro de la carpeta del proyecto correr el comando "composer install"
+2.- Copiar y/o configurar el .env
+3.- Generar app_key -> php artisan key:generate
+4.- Crear base de datos en el localhost si aplica
+5.- Correr el comando en la carpeta del proyecto php artisan storage:link para crear el link simbolico
+
+/home/tmorgan/Documentos/Tona/Desarrollo/phpLaravel/apiTest/storage/app/public/tona@api.com_image_1550785580.jpg
+
+ToMoVa921208+
